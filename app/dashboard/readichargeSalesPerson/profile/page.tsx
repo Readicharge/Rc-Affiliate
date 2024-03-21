@@ -27,8 +27,8 @@ export default  function page() {
       console.log(values)
   }
   return (
-    <ScrollArea className="h-full">
-      <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+    <ScrollArea className="">
+      <div className="flex-1 space-y-4 md:p-8 pt-6">
         <BreadCrumb items={breadcrumbItems} />
 
         <Tabs defaultValue="overview" className="space-y-4" style={{display:"flex",flexDirection:"column", justifyContent:"center",alignItems:"center"}}>
@@ -39,7 +39,7 @@ export default  function page() {
             </TabsTrigger>
             <TabsTrigger value="account" className="p-4 rounded-4xl" style={{borderRadius:33}}>{tabsHeader[2].title}</TabsTrigger>
           </TabsList>
-          <TabsContent value="overview" className="space-y-4 " style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+          <TabsContent value="overview" className="space-y-4" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
             <CreateProfileOne description="Complete your Profile" fields={salesPersonProfileFields} onSave={onSave} />
           </TabsContent>
           <TabsContent value="location" className="space-y-4" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>

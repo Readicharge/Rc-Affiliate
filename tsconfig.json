@@ -37,6 +37,5 @@
 , "components/salesConversion.js"  ],
   "exclude": [
     "node_modules"
-  ],
-  "extends": "expo/tsconfig.base"
+  ]
 }
