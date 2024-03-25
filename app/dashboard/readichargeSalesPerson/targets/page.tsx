@@ -78,7 +78,6 @@ import { toast } from '@/components/ui/use-toast';
 import '@natscale/react-calendar/dist/main.css'
 import { Separator } from '@/components/ui/separator';
 import { CalendarCheckIcon, DollarSignIcon, LucidePercentDiamond, PlusCircleIcon } from 'lucide-react';
-import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
 
@@ -341,7 +340,7 @@ const OptionsSelector = ({ updateOptionsData, optionsData }: any) => {
         orientation='horizontal'
         value={groupSelected}
         onChange={(value) => {
-          if (value.length > 1) {
+          if (value?.length! > 1) {
             alert("Kindly deselct the inital target and then choose the new one")
           }
           else {
@@ -416,16 +415,17 @@ const CalendarComponent = ({ setIsLoading, isLoading, weekData, setWeekData }: a
 
   return (
     <Calendar
-      isDisabled={disableCurrentMonth}
-      isHighlight={disableCurrentMonth}
-      lockView
-      fixedRange={6}
-      isRangeSelector
-      showDualCalendar
-      noPadRangeCell
-      useDarkMode={true}
-      size={350}
-      value={value}
-      onChange={onChange} />
+    isDisabled={disableCurrentMonth}
+    lockView
+    fixedRange={6}
+    isRangeSelector
+    showDualCalendar
+    noPadRangeCell
+    useDarkMode={true}
+    size={350}
+    value={value}
+    onChange={onChange}
+  />
+  
   )
 }

@@ -48,7 +48,6 @@ export default function PageSkeleton({ user,tabsHeader,headerCards,overview,quic
                             <TabsTrigger value="analytics" >
                                 {tabsHeader[1].title}
                             </TabsTrigger>
-                            <TabsTrigger value="maps" >{tabsHeader[2].title}</TabsTrigger>
                         </TabsList>
                         <TabsContent value="overview" className="space-y-4">
 
@@ -112,9 +111,7 @@ export default function PageSkeleton({ user,tabsHeader,headerCards,overview,quic
                         <TabsContent value="analytics" className="space-y-4">
                             <ProfileAndBusinessCard user={user} backgroundOption="stylish" />
                         </TabsContent>
-                        <TabsContent value="maps" className="space-y-4">
-                        <WrappedMapComponent usersData={usersData} centralAddress={centralAddress} areaValue={areaValue} />
-                        </TabsContent>
+                       
 
                     </Tabs>
                 </div>) : (

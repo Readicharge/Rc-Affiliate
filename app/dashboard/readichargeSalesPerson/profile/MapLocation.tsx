@@ -88,8 +88,9 @@ const Map: React.FC<MapProps> = ({ addresses }) => {
     };
 
     return (
-        <Card className="bg-[#06061e] bg-opacity-30 border-none" style={{ borderRadius: 53 }}>
-           <div className="w-full">
+        <Card className="bg-transparent border-none" style={{ borderRadius: 53 }}>
+           <h4 className="font-medium leading-none text-4xl text-center mb-6">Search your area</h4>
+           <div className="w-full max-w-md">
                 <GoogleMap
                     zoom={12}
                     center={center}
@@ -99,7 +100,7 @@ const Map: React.FC<MapProps> = ({ addresses }) => {
                     }}
                     mapContainerStyle={{
                         width: '100%',
-                        height: '65vh',
+                        height: '100%',
                         borderRadius: 23,
                         position:"relative"
                     }}

@@ -13,7 +13,13 @@ export default function page() {
   const [productData, setProductData] = useState([]);
 
   const getData = async () => {
-    const productData = await axios.get("/api/affiliates/getData/");
+
+    const idata = await axios.get("/api/auth/getProfile/");
+
+    console.log(idata.data.data.readicharge_Core_id)
+    const productData = await axios.post("/api/affiliates/getDataAsRC/",{
+      affiliate_id:idata.data.data.readicharge_Core_id
+    });
     console.log(productData.data.data,"Response")
     setProductData(productData.data.data)
   }
