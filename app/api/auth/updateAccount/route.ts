@@ -82,7 +82,7 @@ export async function PUT(request:NextRequest)
             },
             tos_acceptance :{
                 date: termsOfServiceAcceptance.date,
-                ip : termsOfServiceAcceptance.ip
+                ip : termsOfServiceAcceptance.ip === "localhost"? "127.0.0.1" : termsOfServiceAcceptance.ip,
             },
             external_account : {
               object : "bank_account",

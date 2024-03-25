@@ -36,9 +36,9 @@ export default function ProfileBusinessCardQRCode({ user }: any) {
               </Avatar>
             </CardContent>
             <CardContent>
-              <p className="text-lg text-[#06061e] font-semibold">{user.userBasedData.firstName} {user.userBasedData.lastName}</p>
-              <p className="text-md text-gray-500">{user.userBasedData.email}</p>
-              <p className="text-md text-gray-500">{user.userBasedData.contactNo}</p>
+              <p className="text-lg text-[#06061e] font-semibold">{user?.userBasedData?.firstName} {user?.userBasedData?.lastName}</p>
+              <p className="text-md text-gray-500">{user?.userBasedData?.email}</p>
+              <p className="text-md text-gray-500">{user?.userBasedData?.contactNo}</p>
               <p className="text-md text-gray-700">ReadiCharge LLC</p>
             </CardContent>
           </CardContent>

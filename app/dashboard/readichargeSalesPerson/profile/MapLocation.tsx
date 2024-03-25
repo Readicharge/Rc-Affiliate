@@ -88,18 +88,9 @@ const Map: React.FC<MapProps> = ({ addresses }) => {
     };
 
     return (
-        <div className='relative'>
-            <Card className='bg-[#06061e] absolute top-4 right-4 bg-opacity-50 flex flex-row gap-x-2 p-4 border-none' style={{ borderRadius: 33, zIndex: 200 }}>
-                <input
-                    type="text"
-                    placeholder="Search Address"
-                    className='p-2 bg-transparent placeholder-white text-whtie border-none focus:outline-none focus:border-transparent focus:bg-transparent rounded-2xl'
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <Button variant="outline" className='p-4 rounded-2xl border-white ' onClick={handleSearch}>Find Area</Button>
-            </Card>
-            <div className='w-[50vw]'>
+        <Card className="bg-transparent border-none" style={{ borderRadius: 53 }}>
+           <h4 className="font-medium leading-none text-4xl text-center mb-6">Search your area</h4>
+           <div className="w-full max-w-md">
                 <GoogleMap
                     zoom={12}
                     center={center}
@@ -109,9 +100,9 @@ const Map: React.FC<MapProps> = ({ addresses }) => {
                     }}
                     mapContainerStyle={{
                         width: '100%',
-                        height: '65vh',
+                        height: '100%',
                         borderRadius: 23,
-                        position: 'relative' // Ensure map container has position: relative
+                        position:"relative"
                     }}
                     onLoad={onLoad}
                 >
@@ -124,24 +115,40 @@ const Map: React.FC<MapProps> = ({ addresses }) => {
                         </Fragment>
                     ))}
                     {/* Scroll area positioned at bottom left */}
-                    <ScrollArea className='absolute top-10 left-0 w-[50%] h-[40vh] flex flex-row gap-x-2 p-4 border-none' style={{ zIndex: 200 }}>
+
+                    <ScrollArea className='  w-full  lg:h-[40vh] flex flex-row p-1 border-none' >
+                        <Card className='bg-[#06061e]  justify-between flex  bg-opacity-50 flex flex-row p-2 border-none' style={{ borderRadius: 33 }}>
+                            <input
+                                type="text"
+                                placeholder="Search Address"
+                                className='p-2 bg-transparent placeholder-white text-whtie border-none focus:outline-none focus:border-transparent focus:bg-transparent rounded-2xl'
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                            <Button variant="outline" className='p-4 rounded-2xl border-white ' onClick={handleSearch}>Find</Button>
+                        </Card>
+                        
                         <CheckboxGroup
                             value={selected}
                             onValueChange={setSelected}
+                            className='my-4 mx-2'
                         >
                             {selectedMarkers.map((marker, index) => (
                                 <CustomCheckBox value={marker.id}>{marker.name}</CustomCheckBox>
                             ))}
                         </CheckboxGroup>
+                        {selected.length > 0 && (
+                        <Button className=' bg-[#96d232] text-[#06061e]' onClick={handleSave}>
+                            Save
+                        </Button>
+                    )}
                     </ScrollArea>
+                  
                 </GoogleMap>
-                {selected.length > 0 && (
-                            <Button className='absolute bottom-10 right-10 bg-[#96d232] text-[#06061e]' onClick={handleSave}>
-                                Save
-                            </Button>
-                        )}
             </div>
-        </div>
+
+            </Card>
+
     );
 };
 

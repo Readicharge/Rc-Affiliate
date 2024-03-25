@@ -26,18 +26,38 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "userName",
-    header: "NAME",
+    header: " USERNAME",
+  },
+  {
+    accessorKey: "userBasedData.firstName",
+    header: "FIRST NAME",
+  },
+  {
+    accessorKey: "userBasedData.lastName",
+    header: "LAST NAME",
   },
   {
     accessorKey: "email",
     header: "EMAIL ADDRESS",
   },
   {
-    accessorKey: "readicharge_Core_id",
-    header: "USER ID",
+    accessorKey: "userBasedData.contactNo",
+    header: "CONTACT NO",
   },
   {
-    id: "actions",
-    cell: ({ row }) => <CellAction data={row.original} />,
+    accessorKey: "userBasedData.addressLine1",
+    header: "ADDRESS LINE 1",
+  },
+  {
+    accessorKey: "userBasedData.city",
+    header: "CITY",
+  },
+  {
+    accessorKey: "userBasedData.state",
+    header: "STATE",
+  },
+  {
+    accessorKey: "userBasedData.zipCode",
+    header: "ZIP CODE",
   },
 ];

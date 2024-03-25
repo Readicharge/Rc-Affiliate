@@ -11,6 +11,90 @@ import MapView from "./MapView";
 const breadcrumbItems = [{ title: "Profile", link: "/dashboard/profile" }];
 export default  function page() {
   const [productData, setProductData] = useState([]);
+  const [profileValue, setProfileValue] = useState({
+    email: "",
+    userType: "",
+    userBasedData: salesPersonProfileFields,
+    accountData: accountInformationFields,
+  });
+
+  const [locationData, setLocationData] = useState([]);
+
+  const getProfileData = async () => {
+    const userData = await axios.get("/api/auth/getProfile/");
+
+    console.log(userData)
+    setProfileValue(
+      {
+        email: "",
+        userType: "",
+        userBasedData: [
+          {
+            id: "firstName",
+            title: "First Name",
+            value: userData?.data?.data?.userBasedData?.firstName
+          },
+          {
+            id: "lastName",
+            title: "Last Name",
+            value: userData?.data?.data?.userBasedData?.lastName
+          },
+          {
+            id: "email",
+            title: "Email Address",
+            value: userData?.data?.data?.userBasedData?.email
+          },
+          {
+            id: "contactNo",
+            title: "Contact Number",
+            value: userData?.data?.data?.userBasedData?.contactNo
+          },
+          {
+            id: "addressLine1",
+            title: "Address Line 1",
+            value: userData?.data?.data?.userBasedData?.addressLine1
+          },
+          {
+            id: "city",
+            title: "city",
+            value: userData?.data?.data?.userBasedData?.city
+          },
+          {
+            id: "state",
+            title: "state",
+            value: userData?.data?.data?.userBasedData?.state
+          },
+          {
+            id: "zipCode",
+            title: "zipCode",
+            value: userData?.data?.data?.userBasedData?.zipCode
+          }
+        ],
+        accountData: [{
+          id: "accountNumber",
+          title: "Account Number",
+          value: userData?.data?.data?.accountData ? "XXX-XXX-XXXX" : ""
+        },
+        {
+          id: "routingNumber",
+          title: "Routing Number",
+          value: userData?.data?.data?.accountData  ? "XXX-XXX-XXXX" : ""
+        },
+        {
+          id: "SSNNumber",
+          title: "SSN Number",
+          value: userData?.data?.data?.accountData  ? "XXX-XXX-XXXX" : ""
+        }]
+      },
+
+    )
+  }
+
+  useEffect(() => {
+    getData();
+    getProfileData();
+  }, [])
+
 
   const getData = async () => {
     const productData = await axios.get("/api/locationCard/getLocationCards/");
@@ -18,17 +102,35 @@ export default  function page() {
     setProductData(productData.data.data)
   }
 
-  useEffect(() => {
-    getData();
-  }, [])
 
+  const onUpdateAccountData = async (values: any) => {
 
-  const onSave = async (values:any) => {
-      console.log(values)
+    const userData = await axios.get("/api/auth/getProfile/");
+
+    console.log(userData)
+
+    const response = await axios.put("/api/auth/updateAccount/", { email: userData.data.data?.email, userType: userData.data.data?.userType, idata: values,userData:userData.data.data })
+
+    console.log(response)
   }
+
+
+  const onSave = async (values: any) => {
+
+    const userData = await axios.get("/api/auth/getProfile/");
+
+    console.log(userData)
+
+
+    const response = await axios.put("/api/auth/updateProfile/", { email: userData.data.data?.email, userType: userData.data.data?.userType, idata: values})
+
+    console.log(response)
+  }
+
+
   return (
     <ScrollArea className="h-full">
-      <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+      <div className="flex-1 space-y-4 md:p-8 pt-6">
         <BreadCrumb items={breadcrumbItems} />
 
         <Tabs defaultValue="overview" className="space-y-4" style={{display:"flex",flexDirection:"column", justifyContent:"center",alignItems:"center"}}>
@@ -39,14 +141,14 @@ export default  function page() {
             </TabsTrigger>
             <TabsTrigger value="account" className="p-4 rounded-4xl" style={{borderRadius:33}}>{tabsHeader[2].title}</TabsTrigger>
           </TabsList>
-          <TabsContent value="overview" className="space-y-4 " style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-            <CreateProfileOne description="Complete your Profile" fields={salesPersonProfileFields} onSave={onSave} />
+          <TabsContent value="overview" className="space-y-4" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+            <CreateProfileOne description="Complete your Profile" fields={profileValue.userBasedData} onSave={onSave} />
           </TabsContent>
           <TabsContent value="location" className="space-y-4" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
           <MapView addresses={productData} />
           </TabsContent>
           <TabsContent value="account" className="space-y-4" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-            <CreateProfileOne description="Verify your Bank" fields={accountInformationFields} onSave={onSave} />
+            <CreateProfileOne description="Verify your Bank" fields={profileValue.accountData} onSave={onUpdateAccountData} />
           </TabsContent>
         </Tabs>
       </div>
@@ -71,17 +173,17 @@ const accountInformationFields = [
   {
     id: "accountNumber",
     title: "Account Number",
-    value: ""
+    value: ''
   },
   {
     id: "routingNumber",
     title: "Routing Number",
-    value: ""
+    value: ''
   },
   {
-    id: "accountNumber",
+    id: "SSNNumber",
     title: "SSN Number",
-    value: ""
+    value: ''
   },
 ]
 
@@ -107,4 +209,24 @@ const salesPersonProfileFields = [
     title: "Contact Number",
     value: ""
   },
+  {
+    id: "addressLine1",
+    title: "Address Line 1",
+    value: ""
+  },
+  {
+    id: "city",
+    title: "city",
+    value: ""
+  },
+  {
+    id: "state",
+    title: "state",
+    value: ""
+  },
+  {
+    id: "zipCode",
+    title: "zipCode",
+    value: ""
+  }
 ];

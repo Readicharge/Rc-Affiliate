@@ -46,6 +46,9 @@ const userSchema= new mongoose.Schema({
     socialData:{
         type:Object
     },
+    locationData:{
+        type:Object
+    },
     isVerified:{
         type:Boolean,
         default:false
