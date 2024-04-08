@@ -134,7 +134,7 @@ const Map: React.FC<MapProps> = ({ addresses }) => {
                             className='my-4 mx-2'
                         >
                             {selectedMarkers.map((marker, index) => (
-                                <CustomCheckBox value={marker.id}>{marker.name}</CustomCheckBox>
+                                <CustomCheckBox value={marker?.id}>{marker.name}</CustomCheckBox>
                             ))}
                         </CheckboxGroup>
                         {selected.length > 0 && (
