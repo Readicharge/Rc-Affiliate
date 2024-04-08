@@ -11,12 +11,22 @@ export async function GET(request:NextRequest)
 {
     try {
         const userId = await getDataFromToken(request);
-        const user = await User.findOne({_id:userId.id}).select("-password");
+        if(userId!== undefined)
+            {
+                const user = await User.findOne({_id:userId?.id}).select("-password");
 
-        return NextResponse.json({
-            message:"User Found",
-            data:user
-        })
+                return NextResponse.json({
+                    message:"User Found",
+                    data:user
+                })
+            }
+             else {
+                return NextResponse.json({
+                    message:"User Not Found Found",
+                })
+             }
+
+      
     } catch (error:any) {
         console.log(error)
         return NextResponse.json({error:error.message},{status:400})
