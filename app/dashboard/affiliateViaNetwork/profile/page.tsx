@@ -1,7 +1,6 @@
 "use client";
 import BreadCrumb from "@/components/breadcrumb";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { CreateProfile1 } from "../../skeleton/profile/AffiliateViaNetowork";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CreateProfileOne from "@/components/forms/user-profile-stepper/create-profile";
 import axios from "axios";
